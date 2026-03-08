@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/veera/Downloads/mongodb-driver-sync-5.6.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/veera/Downloads/mongodb-driver-core-5.6.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/veera/Downloads/bson-5.6.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/veera/Downloads/spark-core-2.9.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/veera/Downloads/slf4j-simple-2.0.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/veera/Downloads/slf4j-api-2.0.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/veera/Downloads/javax.servlet-api-4.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/veera/Downloads/jetty-server-9.4.48.v20220622.jar"/>
+	<classpathentry kind="lib" path="C:/Users/veera/Downloads/jetty-util-9.4.48.v20220622.jar"/>
+	<classpathentry kind="lib" path="C:/Users/veera/Downloads/jetty-io-9.4.48.v20220622.jar"/>
+	<classpathentry kind="lib" path="C:/Users/veera/Downloads/jetty-http-9.4.48.v20220622.jar"/>
+	<classpathentry kind="lib" path="C:/Users/veera/Downloads/jetty-servlet-9.4.48.v20220622.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

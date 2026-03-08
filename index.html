@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Inventory Management System</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+Inventory Management System
+</header>
+
+<div class="container">
+
+<h2>Inventory Dashboard</h2>
+
+<input class="search-box" id="searchId" placeholder="Search Product ID">
+<button onclick="searchProduct()">Search</button>
+
+<button class="add-btn" onclick="loadProducts()">Refresh</button>
+
+<div class="form">
+
+<h3>Add Product</h3>
+
+<input id="id" placeholder="ID">
+<input id="name" placeholder="Name">
+<input id="qty" placeholder="Quantity">
+<input id="price" placeholder="Price">
+<br>
+
+<button class="add-btn" onclick="addProduct()">Add Product</button>
+<button class="add-btn" onclick="loadProducts()">Refresh</button>
+
+</div>
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Quantity</th>
+<th>Price</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="productTable"></tbody>
+
+</table>
+
+</div>
+
+<script>
+
+function loadProducts(){
+
+fetch("http://localhost:8080/products")
+.then(res=>res.json())
+.then(data=>{
+
+let table=document.getElementById("productTable");
+
+table.innerHTML="";
+
+data.forEach(p=>{
+
+table.innerHTML+=`
+
+<tr>
+
+<td>${p.productId}</td>
+<td>${p.name}</td>
+<td>${p.quantity}</td>
+<td>${p.price}</td>
+
+<td>
+
+<button class="update-btn" onclick="updateProduct(${p.productId})">Update</button>
+
+<button class="delete-btn" onclick="deleteProduct(${p.productId})">Delete</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+});
+
+}
+
+function addProduct(){
+
+let id=document.getElementById("id").value;
+let name=document.getElementById("name").value;
+let qty=document.getElementById("qty").value;
+let price=document.getElementById("price").value;
+
+fetch(`http://localhost:8080/addProduct?id=${id}&name=${name}&qty=${qty}&price=${price}`,{
+method:"POST"
+})
+.then(res=>res.text())
+.then(data=>{
+alert(data);
+loadProducts();
+});
+
+}
+
+function deleteProduct(id){
+
+fetch(`http://localhost:8080/deleteProduct/${id}`,{
+method:"DELETE"
+})
+.then(res=>res.text())
+.then(data=>{
+alert(data);
+loadProducts();
+});
+
+}
+
+function updateProduct(id){
+
+	let name = prompt("Enter new product name");
+	let qty = prompt("Enter new quantity");
+	let price = prompt("Enter new price");
+
+	fetch(`http://localhost:8080/updateProduct?id=${id}&name=${name}&qty=${qty}&price=${price}`,{
+	method:"PUT"
+	})
+	.then(res=>res.text())
+	.then(data=>{
+	alert(data);
+	loadProducts();
+	})
+	.catch(err=>{
+	console.error(err);
+	alert("Update failed");
+	});
+
+	}
+
+function searchProduct(){
+
+	let id=document.getElementById("searchId").value;
+
+	fetch(`http://localhost:8080/search/${id}`)
+	.then(res=>res.json())
+	.then(p=>{
+
+	let table=document.getElementById("productTable");
+
+	if(!p.productId){
+	alert("Product not found");
+	loadProducts();
+	return;
+	}
+
+	table.innerHTML=`
+
+	<tr>
+	<td>${p.productId}</td>
+	<td>${p.name}</td>
+	<td>${p.quantity}</td>
+	<td>${p.price}</td>
+	<td>-</td>
+	</tr>
+
+	`;
+
+	});
+
+	}
+
+window.onload = loadProducts;
+</script>
+
+</body>
+</html>
