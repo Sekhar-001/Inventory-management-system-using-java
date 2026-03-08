@@ -66,7 +66,11 @@ InventorySystem
 │   └── style.css
 │
 └── README.md
--System Architecture:
+\
+
+
+
+## 🗂System Architecture:
 The system follows a client-server architecture.
 Frontend (HTML, CSS, JavaScript)
         │
